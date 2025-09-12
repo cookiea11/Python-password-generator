@@ -1,4 +1,6 @@
 import random
+import string
+import math
 import tkinter as tk
 from tkinter import messagebox
 
@@ -21,6 +23,34 @@ def generate_password(num_words=4, include_numbers=True, include_symbols=True):
 
     return password
 
+# ---------- Strength calculation ----------
+def estimate_entropy(password: str) -> float:
+    pool = 0
+    if any(c.islower() for c in password): pool += 26
+    if any(c.isupper() for c in password): pool += 26
+    if any(c.isdigit() for c in password): pool += 10
+    if any(c in string.punctuation for c in password): pool += 32
+    if "-" in password: pool += 1  # account for the dash separator
+
+    if pool == 0:
+        pool = len(set(password)) or 2
+
+    entropy = len(password) * math.log2(pool)
+    return round(entropy, 2)
+
+def strength_label(entropy_bits: float):
+    if entropy_bits < 28:
+        return "Very Weak", "red"
+    elif entropy_bits < 36:
+        return "Weak", "orange"
+    elif entropy_bits < 60:
+        return "Reasonable", "yellow"
+    elif entropy_bits < 128:
+        return "Strong", "lightgreen"
+    else:
+        return "Very Strong", "green"
+
+# ---------- Callbacks ----------
 def on_generate():
     try:
         num_words = int(word_entry.get())
@@ -29,6 +59,13 @@ def on_generate():
 
         password = generate_password(num_words, include_numbers, include_symbols)
         output_var.set(password)
+
+        # Update strength
+        entropy = estimate_entropy(password)
+        label, color = strength_label(entropy)
+        strength_var.set(f"{label} ({entropy} bits)")
+        strength_label_widget.config(fg=color)
+
     except ValueError:
         messagebox.showerror("Input Error", "Please enter a valid number of words.")
 
@@ -45,7 +82,7 @@ def on_copy():
 # ---------------- GUI ----------------
 root = tk.Tk()
 root.title("🔐 Password Generator")
-root.geometry("450x320")
+root.geometry("480x380")
 root.configure(bg="black")
 
 # Common style
@@ -57,7 +94,8 @@ ENTRY_COLOR = "#1e1b29"
 
 # Input: number of words
 tk.Label(root, text="Enter number of words:", font=FONT, fg=FG_COLOR, bg=BG_COLOR).pack(pady=5)
-word_entry = tk.Entry(root, font=FONT, bg=ENTRY_COLOR, fg="white", insertbackground="white", justify="center")
+word_entry = tk.Entry(root, font=FONT, bg=ENTRY_COLOR, fg="white",
+                      insertbackground="white", justify="center")
 word_entry.insert(0, "4")
 word_entry.pack(pady=5)
 
@@ -79,6 +117,12 @@ output_var = tk.StringVar()
 output_entry = tk.Entry(root, textvariable=output_var, font=FONT, bg=ENTRY_COLOR,
                         fg=FG_COLOR, justify="center", width=40, relief="flat")
 output_entry.pack(pady=5)
+
+# Strength label
+strength_var = tk.StringVar(value="Password Strength: N/A")
+strength_label_widget = tk.Label(root, textvariable=strength_var,
+                                 font=("Consolas", 12, "bold"), bg=BG_COLOR, fg="gray")
+strength_label_widget.pack(pady=5)
 
 # Copy button
 tk.Button(root, text="Copy to Clipboard", font=FONT, fg="white", bg=BTN_COLOR,
