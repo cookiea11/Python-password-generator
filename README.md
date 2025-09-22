@@ -1,39 +1,46 @@
- Python Password Generator  
+# 🔐 Python Password Generator  
 
 A simple yet powerful password generator built with Python.  
 The tool allows users to create secure, random passwords with customizable options.  
 
 ---
 
- Features  
-- Generate strong random passwords  
-- Adjustable length and character sets (uppercase, lowercase, digits, symbols)  
-- GUI support for ease of use (under development)  
-- Planned features:  
-  - Dark/Light theme toggle  
-  - Password strength meter  
-  - Encrypted local vault for storing passwords  
+## 🎯 Project Goal  
+This project aims to help users generate strong and customizable passwords.  
+With support for different character sets, adjustable length, and planned GUI features, it provides both **security** and **ease of use**.  
 
 ---
-Roadmap / Open Issues-
 
- -Implement encrypted local vault for saving passwords
+## 🔬 Project Overview  
+We provide a complete password generation pipeline with a focus on usability and security:  
 
- -Add theme toggle (dark/light mode) in GUI
+📂 Character set customization  
+🔢 Adjustable password length  
+🖱️ One-click copy to clipboard (planned)  
+🌑🌕 Theme toggle (planned)  
+📊 Password strength evaluation and fun taglines (planned)  
+🔒 Optional vault for secure local storage (planned)  
 
- -Enhance password strength display in GUI
+---
 
- -Add requirements.txt
+## 📊 Features  
+- Generate strong random passwords  
+- Choose from uppercase, lowercase, numbers, and symbols  
+- Adjustable length for flexibility  
+- Planned GUI enhancements:  
+  - Password strength meter  
+  - Copy-to-clipboard button  
+  - Dark/Light theme support  
+  - Exclude certain characters from password generation  
 
-Installation  
+---
+ 
+---
 
-Clone the repository and install dependencies:  
+## ⚙️ Setup  
 
+It is recommended to run the project in a Python 3.x environment.  
+
+### 1. Clone the repository  
 ```bash
-git clone https://github.com/cookiea11/Python-password-generator.git
-cd Python-password-generator
-pip install -r requirements.txt
-```
-License
-
-This project is licensed under the MIT License
+git clone https://github.com/<your-username>/Python-password-generator.git
