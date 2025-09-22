@@ -33,7 +33,7 @@ Clone the repository and install dependencies:
 git clone https://github.com/cookiea11/Python-password-generator.git
 cd Python-password-generator
 pip install -r requirements.txt
-
+```
 License
 
 This project is licensed under the MIT License
