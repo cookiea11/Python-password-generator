@@ -10,9 +10,9 @@ The tool allows users to create secure, random passwords with customizable optio
 - Adjustable length and character sets (uppercase, lowercase, digits, symbols)  
 - GUI support for ease of use (under development)  
 - Planned features:  
-  - 🌑🌕 Dark/Light theme toggle  
-  - 📊 Password strength meter  
-  - 🔒 Encrypted local vault for storing passwords  
+  - Dark/Light theme toggle  
+  - Password strength meter  
+  - Encrypted local vault for storing passwords  
 
 ---
 Roadmap / Open Issues-
